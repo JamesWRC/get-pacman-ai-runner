@@ -11,12 +11,7 @@ from pwd import getpwnam
 
 RESOURCE_URL = "https://getresources.pacman.ai"
 
-print(os.getegid())
-print("--")
-# os.setegid('nobody')
-print(os.getegid())
 
-exit(0)
 
 def setVariables():
     # gets values from this script, .env file or params when running this file.
@@ -85,7 +80,7 @@ def run():
     # Set the uid as root again
     os.setuid(0)
     cleanUp()
-    
+
 
 
 
