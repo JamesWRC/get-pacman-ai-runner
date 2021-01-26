@@ -113,7 +113,7 @@ def validateAuthentication():
 def installRequirements():
     # Install all required dependencies to tun the server and the Docker containers that the runners use.
     # Passing in the non root user to run docker as a non root user to reduce any escelated privileges when running the un trusted code in the secure containers.
-    os.system('sudo ./codebase/install.sh ' + NON_ROOT_USER)
+    os.system('sudo sh ./codebase/install.sh ' + NON_ROOT_USER)
 
 
 
