@@ -32,7 +32,7 @@ def getResources():
     print("\n\t [+] Moving files.\n")
     print("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
     os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
-
+    exit(0)
     ########################################################################
     #                                                                      #
     #           TSL/SSL Certificates For Mutual Authentication             #
