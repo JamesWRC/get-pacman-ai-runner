@@ -29,7 +29,7 @@ def getResources():
     # Get the code from (private) GitHub Repo.
     z.extractall(".")
 
-
+    exit(0)
     print("\n\t [+] Moving files.\n")
     os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
 
