@@ -65,7 +65,7 @@ def getResources():
     cleanUp()
 
 def setStatus(filename , dataToSave):
-    f = open('codebase/' + filename, "w+")
+    f = open('./codebase/' + filename, "w+")
     f.write(dataToSave)
     f.close()
     
