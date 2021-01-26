@@ -32,7 +32,6 @@ def getResources():
     print("\n\t [+] Moving files.\n")
     print("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
     os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
-    exit(0)
     ########################################################################
     #                                                                      #
     #           TSL/SSL Certificates For Mutual Authentication             #
@@ -55,10 +54,6 @@ def getResources():
 
     # Validate that a request using mutual authentication is accepted by Cloudflares WAF.
     validateAuthentication()
-
-
-    # Cleanup the workspace.
-    cleanUp()
 
 def setStatus(filename , dataToSave):
     f = open('./codebase/' + filename, "w+")
@@ -129,4 +124,5 @@ getResources()
 installRequirements()
 
 # Run server 
-# run()
+run()
+
