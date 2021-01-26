@@ -125,11 +125,12 @@ def installRequirements():
     os.system('sudo codebase/install.sh ' + NON_ROOT_USER)
 
 
-# Install and set up environment
-installRequirements()
 
 # Get the codebase
 getResources()
+
+# Install and set up environment
+installRequirements()
 
 # Run server 
 run()
