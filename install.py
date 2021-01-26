@@ -61,8 +61,15 @@ def setStatus(filename , dataToSave):
     f.close()
     
 def run():
+    # Set the directory to codebase
+    currentDirectory = os.getcwd()
+    os.chdir('./codebase')
+
+    # Start server
     os.system('cd ./codebase & sudo -u ' + NON_ROOT_USER + ' python3 driver.py')
-    
+
+    # Set the directory back to the parent directory
+    os.chdir(currentDirectory)
 
 
 
