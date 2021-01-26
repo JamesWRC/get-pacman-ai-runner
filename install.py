@@ -104,7 +104,7 @@ def validateAuthentication():
         headers = {
         'Content-Type': 'application/json',
         }
-        response = requests.request('GET', "https://certificate.pacman.ai", headers=headers, cert=("private.cert", "private.key"))
+        response = requests.request('GET', "https://certificate.pacman.ai", headers=headers, cert=("./codebase/private.cert", "./codebase/private.key"))
         # If the response is 403 (forbidden, blocked by cloudflares WAF rules for a bad certificate for mutual authentication)
         if response.status_code == 403:
             print(" [!] Error there was an issue with the certificates. This is either due to an issue with the request itself or the certificate and/or key are corrupted / not valid. Terminating with FAILURE.")
