@@ -91,9 +91,9 @@ def cleanUp():
 def checkKeys():
     while True:
         print("[+] Checking private certificate and key...")
-        if not (os.path.isfile('codebase/driver.py') and \
-            os.path.isfile('codebase/private.cert') and \
-            os.path.isfile('codebase/private.key')):
+        if not (os.path.isfile('./codebase/driver.py') and \
+            os.path.isfile('./codebase/private.cert') and \
+            os.path.isfile('./codebase/private.key')):
             print(" [!] Could not find 'private.cert' and/or private.key, ensure the 'codebase' \
                 folder exists and is populated with the 'private.cert' AND the 'private.key... \n\t Trying again..." )
             time.sleep(5)
@@ -104,10 +104,10 @@ def validateAuthentication():
         headers = {
         'Content-Type': 'application/json',
         }
-        response = requests.request('GET', "https://queue.pacman.ai", headers=headers, cert=("private.cert", "private.key"))
+        response = requests.request('GET', "https://certificate.pacman.ai", headers=headers, cert=("private.cert", "private.key"))
         # If the response is 403 (forbidden, blocked by cloudflares WAF rules for a bad certificate for mutual authentication)
         if response.status_code == 403:
-            print(" [!] Error there was am issue with the certificates. This is either due to an issue with the request itself or the certificate and/or key are corrupted / not valid. Terminating with FAILURE.")
+            print(" [!] Error there was an issue with the certificates. This is either due to an issue with the request itself or the certificate and/or key are corrupted / not valid. Terminating with FAILURE.")
             exit(403)
         # If the the 
         elif response.status_code == 200:
