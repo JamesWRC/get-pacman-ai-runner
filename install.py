@@ -61,7 +61,7 @@ def setStatus(filename , dataToSave):
     f.close()
     
 def run():
-    os.system('sudo -u ' + NON_ROOT_USER + ' python3 codebase/driver.py')
+    os.system('cd ./codebase & sudo -u ' + NON_ROOT_USER + ' python3 driver.py')
     
 
 
