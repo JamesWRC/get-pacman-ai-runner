@@ -27,11 +27,11 @@ def getResources():
     z = zipfile.ZipFile(io.BytesIO(request.content))
     
     # Get the code from (private) GitHub Repo.
-    z.extractall("get-pacman-ai-runner/")
+    z.extractall(".")
 
 
     print("\n\t [+] Moving files.\n")
-    os.system("mv " + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
+    os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
 
     ########################################################################
     #                                                                      #
