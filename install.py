@@ -61,16 +61,8 @@ def setStatus(filename , dataToSave):
     f.close()
     
 def run():
-
-    # Get and set the UID of the non root user.
-    nonRootUserUID = getpwnam(NON_ROOT_USER).pw_uid
-    os.setuid(nonRootUserUID)
+    os.system('sudo -u ' + NON_ROOT_USER + ' python3 codebase/driver.py')
     
-    os.system('python3 codebase/driver.py')
-    
-    # Set the uid as root again
-    os.setuid(0)
-    cleanUp()
 
 
 
@@ -125,4 +117,7 @@ installRequirements()
 
 # Run server 
 run()
+
+# Clean up
+cleanUp()
 
