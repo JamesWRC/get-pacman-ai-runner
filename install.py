@@ -66,7 +66,8 @@ def run():
     os.chdir('./codebase')
 
     # Start server
-    os.system('cd ./codebase & sudo -u ' + NON_ROOT_USER + ' python3 driver.py')
+    os.system('cat history.json')
+    os.system('sudo -u ' + NON_ROOT_USER + ' python3 driver.py')
 
     # Set the directory back to the parent directory
     os.chdir(currentDirectory)
