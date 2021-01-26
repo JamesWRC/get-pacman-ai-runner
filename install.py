@@ -85,12 +85,12 @@ def run():
 
 
 def cleanUp():
-    print("\n\t [+] Cleaning up.\n")
+    print("\n [+] Cleaning up.\n")
     os.system("rm -Rfv codebase/* docker/* build.sh") 
 
 def checkKeys():
     while True:
-        print("[+] Checking private certificate and key...")
+        print(" [+] Checking private certificate and key...")
         if not (os.path.isfile('./codebase/driver.py') and \
             os.path.isfile('./codebase/private.cert') and \
             os.path.isfile('./codebase/private.key')):
@@ -133,4 +133,4 @@ getResources()
 installRequirements()
 
 # Run server 
-run()
+# run()
