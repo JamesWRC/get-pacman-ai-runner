@@ -56,10 +56,6 @@ def getResources():
     # Validate that a request using mutual authentication is accepted by Cloudflares WAF.
     validateAuthentication()
 
-    installRequirements()
-
-    # Start the server
-    run()
 
     # Cleanup the workspace.
     cleanUp()
@@ -133,4 +129,4 @@ getResources()
 installRequirements()
 
 # Run server 
-# run()
+run()
