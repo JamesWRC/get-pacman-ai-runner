@@ -77,8 +77,12 @@ def run():
 
 
 def cleanUp():
-    print("\n [+] Cleaning up.\n")
+    print("\n [+] Cleaning up server files.\n")
     os.system("rm -Rfv ./codebase ./docker build.sh") 
+
+    print("\n [+] Cleaning up game files in ramdisk..\n")
+    os.system("rm -Rfv /tmp/ramdisk/codebase") 
+
 
 def checkKeys():
     while True:
@@ -147,6 +151,8 @@ def getGameResources():
     print("\n\t [+] Cleaning up.\n")
     os.system("rm -Rfv " + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION']) 
 
+# Clean up if needed. (Just ensuring there are no left over files that may interfear with updating files etc.)
+cleanUp()
 
 # Get the codebase
 getResources()
