@@ -134,17 +134,15 @@ def getGameResources():
     # Get the code from (private) GitHub Repo.
     z.extractall(".")
 
-    print("\n\t [+] Moving files.\n")
-    print("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
+    print("\n\t [+] Creating directory 'codebase' in ramdisk.\n")
     os.system('mkdir /tmp/ramdisk/codebase')
-    os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* /tmp/ramdisk/codebase")
-    ########################################################################
-    #                                                                      #
-    #           TSL/SSL Certificates For Mutual Authentication             #
-    #                                                                      #
-    ########################################################################
+
     time.sleep(5)
-    
+    print("\n\t [+] Moving files.\n")
+
+    os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* /tmp/ramdisk/codebase")
+
+    time.sleep(5)
 
     print("\n\t [+] Cleaning up.\n")
     os.system("rm -Rfv " + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION']) 
