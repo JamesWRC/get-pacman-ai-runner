@@ -11,7 +11,7 @@ import time
 from pwd import getpwnam  
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
-RUNNER_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
+GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 
 
 def setVariables():
@@ -23,7 +23,7 @@ def getResources():
     # Only update and sent to KV if logMsg array length is different, and gameResults are diff README
 #    os.system("wget ")
     headers = {'userKey': KEY}
-    request = requests.get(RESOURCE_URL, headers=headers)
+    request = requests.get(CODEBASE_RESOURCE_URL, headers=headers)
 
     z = zipfile.ZipFile(io.BytesIO(request.content))
     
@@ -122,7 +122,7 @@ def getGameResources():
     # Only update and sent to KV if logMsg array length is different, and gameResults are diff README
 #    os.system("wget ")
     headers = {'userKey': KEY}
-    request = requests.get(RESOURCE_URL, headers=headers)
+    request = requests.get(GAME_CODEBASE_RESOURCE_URL, headers=headers)
 
     z = zipfile.ZipFile(io.BytesIO(request.content))
     
