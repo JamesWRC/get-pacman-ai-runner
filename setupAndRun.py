@@ -10,8 +10,8 @@ import base64
 import time
 from pwd import getpwnam  
 
-RESOURCE_URL = "https://getresources.pacman.ai"
-
+CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
+RUNNER_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 
 
 def setVariables():
