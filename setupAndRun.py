@@ -161,5 +161,5 @@ getGameResources()
 run()
 
 # Clean up
-# cleanUp()
+cleanUp()
 
