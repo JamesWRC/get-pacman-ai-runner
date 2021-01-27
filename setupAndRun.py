@@ -68,6 +68,9 @@ def run():
 
     # Start server
     os.system('touch history.json')
+
+    print("\n [+] Running server!.\n")
+
     os.system('sudo -u ' + NON_ROOT_USER + ' python3 driver.py')
 
     # Set the directory back to the parent directory
