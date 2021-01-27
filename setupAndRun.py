@@ -67,7 +67,8 @@ def run():
     os.chdir('./codebase')
 
     # Start server
-    os.system('touch history.json')
+    os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
+    
 
     print("\n [+] Running server!.\n")
 
