@@ -63,7 +63,8 @@ def setStatus(filename , dataToSave):
     
 def run():
 
-    
+    os.system('sudo chown ' + NON_ROOT_USER + ' *')
+
     # Set the directory to codebase
     currentDirectory = os.getcwd()
     os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
