@@ -77,7 +77,7 @@ def run():
 
 def cleanUp():
     print("\n [+] Cleaning up.\n")
-    os.system("rm -Rfv ./codebase/* ./docker/* build.sh") 
+    os.system("rm -Rfv ./codebase ./docker build.sh") 
 
 def checkKeys():
     while True:
