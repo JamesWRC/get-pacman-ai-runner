@@ -1,5 +1,6 @@
 KEY = "43f4127ddffe3d40fd6a5271eb0140a20e0f77890e66d9e5183a1ba0fb02ef56"
 NON_ROOT_USER="pacman"
+UPDATE_SYSTEM=False
 
 import os
 import json
@@ -114,7 +115,6 @@ def installRequirements():
     # Install all required dependencies to tun the server and the Docker containers that the runners use.
     # Passing in the non root user to run docker as a non root user to reduce any escelated privileges when running the un trusted code in the secure containers.
     os.system('sudo sh ./codebase/install.sh ' + NON_ROOT_USER)
-
 
 
 
