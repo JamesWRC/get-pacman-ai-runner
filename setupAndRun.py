@@ -136,6 +136,7 @@ def getGameResources():
 
     print("\n\t [+] Moving files.\n")
     print("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
+    os.system('mkdir /tmp/ramdisk/codebase')
     os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* /tmp/ramdisk/codebase")
     ########################################################################
     #                                                                      #
