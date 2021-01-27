@@ -117,6 +117,32 @@ def installRequirements():
     os.system('sudo sh ./codebase/install.sh ' + NON_ROOT_USER)
 
 
+def getGameResources():
+    # use userKey to send key
+    # Only update and sent to KV if logMsg array length is different, and gameResults are diff README
+#    os.system("wget ")
+    headers = {'userKey': KEY}
+    request = requests.get(RESOURCE_URL, headers=headers)
+
+    z = zipfile.ZipFile(io.BytesIO(request.content))
+    
+    # Get the code from (private) GitHub Repo.
+    z.extractall(".")
+
+    print("\n\t [+] Moving files.\n")
+    print("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
+    os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* /tmp/ramdisk/codebase")
+    ########################################################################
+    #                                                                      #
+    #           TSL/SSL Certificates For Mutual Authentication             #
+    #                                                                      #
+    ########################################################################
+    time.sleep(5)
+    
+
+    print("\n\t [+] Cleaning up.\n")
+    os.system("rm -Rfv " + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION']) 
+
 
 # Get the codebase
 getResources()
