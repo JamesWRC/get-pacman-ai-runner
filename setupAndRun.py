@@ -66,12 +66,14 @@ def run():
     
     # Set the directory to codebase
     currentDirectory = os.getcwd()
+    os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
+
     os.chdir('./codebase')
 
     os.system('sudo chown ' + NON_ROOT_USER + ' *')
 
     # Start server
-    os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
+    # os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
     
 
     print("\n [+] Running server!.\n")
