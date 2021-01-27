@@ -155,6 +155,9 @@ getResources()
 # Install and set up environment
 installRequirements()
 
+# Install the code to run games (by BERKELY Uni and updated by Sebastian RMIT)
+getGameResources()
+
 # Run server 
 run()
 
