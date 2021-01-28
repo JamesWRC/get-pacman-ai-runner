@@ -15,7 +15,7 @@ GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to 
 COMPLETED_JOB_HISTORY = "codebase/history.json"
 
 # hold data of history
-tempHistory = None
+global tempHistory = None
 def setVariables():
     # gets values from this script, .env file or params when running this file.
     pass
@@ -190,7 +190,7 @@ def buildDockerImage(cleanBuild):
 
 def backupHistoryFile():
     # Open and backup the history file
-    tempHistory = {"history": []}
+    print(" [+] BACKINGUP FILE")
     if os.path.isfile(COMPLETED_JOB_HISTORY):
         with open(COMPLETED_JOB_HISTORY, 'r') as jsonFile:
             tempHistory = json.load(jsonFile)
@@ -199,6 +199,8 @@ def backupHistoryFile():
 
 def restoreJobHistory():
     # Save history file
+    print(" [+] RESTORING FILE")
+    print(tempHistory)
     if os.path.isfile(COMPLETED_JOB_HISTORY):
         with open(COMPLETED_JOB_HISTORY, 'w+') as jsonFile:
 
