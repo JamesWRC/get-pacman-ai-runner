@@ -95,17 +95,17 @@ def cleanUp():
     print("\n [+] Cleaning up game files in ramdisk.\n")
     os.system("rm -Rfv /tmp/ramdisk/codebase")
 
-    print("\n [+] Cleaning pacman docker image.\n")
-    os.system('docker image prune --force') 
+    # print("\n [+] Cleaning pacman docker image.\n")
+    # os.system('docker image prune --force') 
 
-    print("\n [+] Cleaning pacman build cache.\n")
-    os.system('docker builder prune --force')
+    # print("\n [+] Cleaning pacman build cache.\n")
+    # os.system('docker builder prune --force')
 
     print("\n [+] Cleaning unused docker images.\n")
     os.system('docker image rm --force pacman:latest')
 
-    print("\n [+] Cleaning unused Docker volumes.\n")
-    os.system('docker system prune -f --volumes')
+    # print("\n [+] Cleaning unused Docker volumes.\n")
+    # os.system('docker system prune -f --volumes')
 
 
 
