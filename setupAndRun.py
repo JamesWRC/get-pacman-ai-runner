@@ -15,7 +15,7 @@ GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to 
 COMPLETED_JOB_HISTORY = "codebase/history.json"
 
 # hold data of history
-global tempHistory = None
+global tempHistory
 def setVariables():
     # gets values from this script, .env file or params when running this file.
     pass
