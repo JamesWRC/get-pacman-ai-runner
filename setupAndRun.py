@@ -64,7 +64,7 @@ def setStatus(filename , dataToSave):
 def run():
 
     os.system('sudo chown ' + NON_ROOT_USER + ' *')
-
+    os.system('sudo chown ' + NON_ROOT_USER + ' docker/runner/runner.py')
     # Set the directory to codebase
     currentDirectory = os.getcwd()
     os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
@@ -179,7 +179,7 @@ def getGameResources():
 
 def buildDockerImage():
     print("\n [+] Building fresh docker image.\n")
-    os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
+    os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
 # Clean up if needed. (Just ensuring there are no left over files that may interfear with updating files etc.)
 cleanUp()
 
