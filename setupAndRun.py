@@ -91,8 +91,11 @@ def cleanUp():
     print("\n [+] Cleaning up server files.\n")
     os.system("rm -Rfv ./codebase ./docker build.sh") 
 
-    print("\n [+] Cleaning up game files in ramdisk..\n")
-    os.system("rm -Rfv /tmp/ramdisk/codebase") 
+    print("\n [+] Cleaning up game files in ramdisk.\n")
+    os.system("rm -Rfv /tmp/ramdisk/codebase")
+
+    print("\n [+] Cleaning docker image.\n")
+    os.system('docker image rm pacman')
 
 
 def checkKeys():
