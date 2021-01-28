@@ -97,6 +97,9 @@ def cleanUp():
     print("\n [+] Cleaning pacman docker image.\n")
     os.system('docker image prune --force') 
 
+    print("\n [+] Cleaning pacman build cache.\n")
+    os.system('docker builder prune')
+
     print("\n [+] Cleaning unused docker images.\n")
     os.system('docker image rm --force pacman:latest')
 
