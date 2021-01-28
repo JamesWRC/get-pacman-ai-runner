@@ -9,7 +9,7 @@ import zipfile, io
 import base64
 import time
 from pwd import getpwnam  
-
+import sys
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 
@@ -177,9 +177,13 @@ def getGameResources():
 
 
 
-def buildDockerImage():
-    print("\n [+] Building fresh docker image.\n")
-    os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
+def buildDockerImage(cleanBuild):
+    if cleanBuild:
+        print("\n [+] Building fresh docker image.\n")
+        os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
+    else:
+        print("\n [+] Using older docker image.\n")
+        pass    
 # Clean up if needed. (Just ensuring there are no left over files that may interfear with updating files etc.)
 cleanUp()
 
@@ -193,7 +197,12 @@ installRequirements()
 getGameResources()
 
 # Build the image
-buildDockerImage()
+buildClean = True
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--no-clean-build" or sys.argv[1] == "-ncb":
+        buildClean = False
+
+buildDockerImage(buildClean)
 
 # Run server 
 run()
