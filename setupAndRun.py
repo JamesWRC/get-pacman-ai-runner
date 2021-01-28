@@ -12,7 +12,7 @@ from pwd import getpwnam
 import sys
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
-COMPLETED_JOB_HISTORY = "codebase/history.json"
+COMPLETED_JOB_HISTORY = "./codebase/history.json"
 
 def setVariables():
     # gets values from this script, .env file or params when running this file.
