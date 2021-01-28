@@ -95,7 +95,7 @@ def cleanUp():
     os.system("rm -Rfv /tmp/ramdisk/codebase")
 
     print("\n [+] Cleaning docker image.\n")
-    os.system('docker image rm --force pacman')
+    os.system('docker image rm --force pacman:latest')
 
 
 def checkKeys():
