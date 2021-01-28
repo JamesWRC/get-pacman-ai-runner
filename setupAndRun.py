@@ -101,7 +101,7 @@ def cleanUp():
     os.system('docker image rm --force pacman:latest')
 
     print("\n [+] Building fresh docker image.\n")
-    os.system()
+    # os.system()
 
 
 def checkKeys():
