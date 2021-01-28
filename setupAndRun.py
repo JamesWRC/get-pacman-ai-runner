@@ -106,8 +106,6 @@ def cleanUp():
     print("\n [+] Cleaning unused Docker volumes.\n")
     os.system('docker system prune -f --volumes')
 
-    print("\n [+] Building fresh docker image.\n")
-    os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
 
 
 def checkKeys():
@@ -177,6 +175,11 @@ def getGameResources():
     print("\n\t [+] Cleaning up.\n")
     os.system("rm -Rfv " + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION']) 
 
+
+
+def buildDockerImage():
+    print("\n [+] Building fresh docker image.\n")
+    os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
 # Clean up if needed. (Just ensuring there are no left over files that may interfear with updating files etc.)
 cleanUp()
 
@@ -188,6 +191,9 @@ installRequirements()
 
 # Install the code to run games (by BERKELY Uni and updated by Sebastian RMIT)
 getGameResources()
+
+# Build the image
+buildDockerImage()
 
 # Run server 
 run()
