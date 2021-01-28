@@ -201,11 +201,10 @@ def restoreJobHistory(tempHistory):
     # Save history file
     print(" [+] RESTORING FILE")
     print(tempHistory)
-    if os.path.isfile(COMPLETED_JOB_HISTORY):
-        with open(COMPLETED_JOB_HISTORY, 'w+') as jsonFile:
+    with open(COMPLETED_JOB_HISTORY, 'w+') as jsonFile:
 
-            json.dump(tempHistory, jsonFile)
-            jsonFile.close()
+        json.dump(tempHistory, jsonFile)
+        jsonFile.close()
     time.sleep(999)
 # Back up the history file that stores previously run jobs
 tempHistory = backupHistoryFile()
