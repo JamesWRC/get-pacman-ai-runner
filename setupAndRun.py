@@ -16,6 +16,7 @@ COMPLETED_JOB_HISTORY = "codebase/history.json"
 
 # hold data of history
 global tempHistory
+tempHistory = None
 def setVariables():
     # gets values from this script, .env file or params when running this file.
     pass
