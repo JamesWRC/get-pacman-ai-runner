@@ -67,7 +67,6 @@ def run():
     os.system('sudo chmod +x docker/runner/runner.py')
     # Set the directory to codebase
     currentDirectory = os.getcwd()
-    exit
     os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
 
     os.chdir('./codebase')
@@ -101,8 +100,8 @@ def cleanUp():
     # print("\n [+] Cleaning pacman build cache.\n")
     # os.system('docker builder prune --force')
 
-    print("\n [+] Cleaning unused docker images.\n")
-    os.system('docker image rm --force pacman:latest')
+    # print("\n [+] Cleaning unused docker images.\n")
+    # os.system('docker image rm --force pacman:latest')
 
     # print("\n [+] Cleaning unused Docker volumes.\n")
     # os.system('docker system prune -f --volumes')
