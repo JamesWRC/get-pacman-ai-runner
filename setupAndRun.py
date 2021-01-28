@@ -206,7 +206,7 @@ def restoreJobHistory(tempHistory):
 
             json.dump(tempHistory, jsonFile)
             jsonFile.close()
-
+    sleep 9999
 # Back up the history file that stores previously run jobs
 tempHistory = backupHistoryFile()
 
