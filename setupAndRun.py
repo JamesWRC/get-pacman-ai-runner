@@ -107,7 +107,7 @@ def cleanUp():
     os.system('docker system prune -f --volumes')
 
     print("\n [+] Building fresh docker image.\n")
-    os.system('docker build --force-rm=true -t pacman:latest -f docker/Dockerfile .')
+    os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
 
 
 def checkKeys():
