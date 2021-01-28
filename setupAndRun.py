@@ -14,9 +14,6 @@ CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase t
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 COMPLETED_JOB_HISTORY = "codebase/history.json"
 
-# hold data of history
-global tempHistory
-tempHistory = None
 def setVariables():
     # gets values from this script, .env file or params when running this file.
     pass
@@ -191,14 +188,16 @@ def buildDockerImage(cleanBuild):
 
 def backupHistoryFile():
     # Open and backup the history file
+    tempHistoryFile = None
     print(" [+] BACKINGUP FILE")
     if os.path.isfile(COMPLETED_JOB_HISTORY):
         with open(COMPLETED_JOB_HISTORY, 'r') as jsonFile:
-            tempHistory = json.load(jsonFile)
+            tempHistoryFile = json.load(jsonFile)
             jsonFile.close()
+    return tempHistoryFile
 
 
-def restoreJobHistory():
+def restoreJobHistory(tempHistory):
     # Save history file
     print(" [+] RESTORING FILE")
     print(tempHistory)
@@ -207,8 +206,9 @@ def restoreJobHistory():
 
             json.dump(tempHistory, jsonFile)
             jsonFile.close()
+
 # Back up the history file that stores previously run jobs
-backupHistoryFile()
+tempHistory = backupHistoryFile()
 
 # Clean up if needed. (Just ensuring there are no left over files that may interfear with updating files etc.)
 cleanUp()
@@ -231,7 +231,7 @@ if len(sys.argv) > 1:
 buildDockerImage(buildClean)
 
 # Restore hostory file
-restoreJobHistory()
+restoreJobHistory(tempHistory)
 
 # Run server 
 run()
