@@ -111,8 +111,10 @@ def cleanUp():
 
 def cleanContainerVolumes():
     from codebase.util import Util
-    print("cores: " + str(Util().getNumRunners()))
-    exit(0)
+    print(" \t[+] Removing volume for runners...")
+    for runner in Util().getNumRunners():
+        os.system('docker rm -v runner' + str(runner))
+        print(" \t\t[-] Removed volume for runner" + str(runner) + ".")
 
 def checkKeys():
     while True:
