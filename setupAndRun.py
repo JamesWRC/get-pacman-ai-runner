@@ -223,6 +223,7 @@ cleanUp()
 # Get the codebase
 getResources()
 
+# Removes containers volumes since they dont get updated
 cleanContainerVolumes()
 
 # Install and set up environment
@@ -244,6 +245,9 @@ restoreJobHistory(tempHistory)
 
 # Run server 
 run()
+
+# Removes containers volumes since they dont get updated
+cleanContainerVolumes()
 
 # Clean up
 # cleanUp()
