@@ -64,6 +64,8 @@ def setStatus(filename , dataToSave):
 def run():
 
     os.system('sudo chown ' + NON_ROOT_USER + ' *')
+    os.system('sudo chown ' + NON_ROOT_USER + ' docker/')
+
     os.system('sudo chmod +x docker/runner/runner.py')
     # Set the directory to codebase
     currentDirectory = os.getcwd()
