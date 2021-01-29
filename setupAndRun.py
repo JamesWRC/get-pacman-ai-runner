@@ -95,7 +95,7 @@ def cleanUp():
     os.system("rm -Rfv ./codebase ./docker build.sh") 
 
     print("\n \t[+] Cleaning up game files in ramdisk.\n")
-    os.system("rm -Rfv /tmp/ramdisk/codebase")
+    os.system("rm -Rfv /tmp/ramdisk/*")
 
     # print("\n [+] Cleaning pacman docker image.\n")
     # os.system('docker image prune --force') 
