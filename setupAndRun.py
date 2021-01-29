@@ -109,7 +109,10 @@ def cleanUp():
     # print("\n [+] Cleaning unused Docker volumes.\n")
     # os.system('docker system prune -f --volumes')
 
-
+def cleanContainerVolumes():
+    from codebase.util import Util
+    print("cores: " + str(Util().getNumRunners()))
+    exit(0)
 
 def checkKeys():
     while True:
@@ -217,6 +220,8 @@ cleanUp()
 
 # Get the codebase
 getResources()
+
+cleanContainerVolumes()
 
 # Install and set up environment
 installRequirements()
