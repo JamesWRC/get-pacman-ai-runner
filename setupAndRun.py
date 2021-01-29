@@ -190,7 +190,9 @@ def buildDockerImage(cleanBuild):
         print("\n \t[+] Building fresh docker image.\n")
         os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
     else:
-        print("\n \t[+] Using older docker image.\n")
+        print("\n \t[+] Semi-building using older docker image.\n")
+        os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
+
         pass    
 
 def backupHistoryFile():
