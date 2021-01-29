@@ -30,7 +30,7 @@ def getResources():
     # Get the code from (private) GitHub Repo.
     z.extractall(".")
 
-    print("\n\t [+] Moving files.\n")
+    print("\n \t[+] Moving files.\n")
     print("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
     os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
     ########################################################################
@@ -47,7 +47,7 @@ def getResources():
     key = base64.b64decode(request.headers['X-PACMAN-PRIVATE-KEY']).decode('utf-8')
     setStatus("private.key", key)
 
-    print("\n\t [+] Cleaning up.\n")
+    print("\n \t[+] Cleaning up.\n")
     os.system("rm -Rfv " + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION']) 
 
     # Check the key and certificate files exist.
@@ -80,7 +80,7 @@ def run():
     # os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
     
 
-    print("\n [+] Running server!.\n")
+    print("\n \t[+] Running server!.\n")
 
     os.system('sudo -u ' + NON_ROOT_USER + ' python3 driver.py')
 
@@ -91,10 +91,10 @@ def run():
 
 
 def cleanUp():
-    print("\n [+] Cleaning up server files.\n")
+    print("\n \t[+] Cleaning up server files.\n")
     os.system("rm -Rfv ./codebase ./docker build.sh") 
 
-    print("\n [+] Cleaning up game files in ramdisk.\n")
+    print("\n \t[+] Cleaning up game files in ramdisk.\n")
     os.system("rm -Rfv /tmp/ramdisk/codebase")
 
     # print("\n [+] Cleaning pacman docker image.\n")
@@ -112,17 +112,17 @@ def cleanUp():
 def cleanContainerVolumes():
     from codebase.util import Util
     print(" \t[+] Removing volume for runners...")
-    for runner in Util().getNumRunners():
+    for runner in range(0, Util().getNumRunners()):
         os.system('docker rm -v runner' + str(runner))
         print(" \t\t[-] Removed volume for runner" + str(runner) + ".")
 
 def checkKeys():
     while True:
-        print(" [+] Checking private certificate and key...")
+        print(" \t[+] Checking private certificate and key...")
         if not (os.path.isfile('./codebase/driver.py') and \
             os.path.isfile('./codebase/private.cert') and \
             os.path.isfile('./codebase/private.key')):
-            print(" [!] Could not find 'private.cert' and/or private.key, ensure the 'codebase' \
+            print(" \t[!] Could not find 'private.cert' and/or private.key, ensure the 'codebase' \
                 folder exists and is populated with the 'private.cert' AND the 'private.key... \n\t Trying again..." )
             time.sleep(5)
         else:
@@ -135,16 +135,16 @@ def validateAuthentication():
         response = requests.request('GET', "https://certificate.pacman.ai", headers=headers, cert=("./codebase/private.cert", "./codebase/private.key"))
         # If the response is 403 (forbidden, blocked by cloudflares WAF rules for a bad certificate for mutual authentication)
         if response.status_code == 403:
-            print(" [!] Error there was an issue with the certificates. This is either due to an issue with the request itself or the certificate and/or key are corrupted / not valid. Terminating with FAILURE.")
+            print(" \t[!] Error there was an issue with the certificates. This is either due to an issue with the request itself or the certificate and/or key are corrupted / not valid. Terminating with FAILURE.")
             exit(403)
         # If the the 
         elif response.status_code == 200:
-            print(" [+] Certifcate and key have been successfully validated...")
+            print(" \t[+] Certifcate and key have been successfully validated...")
         else:
-            print(" [!] Some unknown error occurred...")
-            print(" [!] Dumping request: \n\n")
+            print(" \t[!] Some unknown error occurred...")
+            print(" \t[!] Dumping request: \n\n")
             print(response.json())
-            print("\n\n [+] Please contact me with the error shown above if needed.")
+            print("\n\n \t[+] Please contact me with the error shown above if needed.")
             exit(1)
 
 def installRequirements():
@@ -170,33 +170,33 @@ def getGameResources():
     # Get the code from (private) GitHub Repo.
     z.extractall(".")
 
-    print("\n\t [+] Creating directory 'codebase' in ramdisk.\n")
+    print("\n \t[+] Creating directory 'codebase' in ramdisk.\n")
     os.system('mkdir /tmp/ramdisk/codebase')
 
     time.sleep(5)
-    print("\n\t [+] Moving files.\n")
+    print("\n \t[+] Moving files.\n")
 
     os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* /tmp/ramdisk/codebase")
 
     time.sleep(5)
 
-    print("\n\t [+] Cleaning up.\n")
+    print("\n \t[+] Cleaning up.\n")
     os.system("rm -Rfv " + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION']) 
 
 
 
 def buildDockerImage(cleanBuild):
     if cleanBuild:
-        print("\n [+] Building fresh docker image.\n")
+        print("\n \t[+] Building fresh docker image.\n")
         os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
     else:
-        print("\n [+] Using older docker image.\n")
+        print("\n \t[+] Using older docker image.\n")
         pass    
 
 def backupHistoryFile():
     # Open and backup the history file
     tempHistoryFile = None
-    print(" [+] BACKINGUP FILE")
+    print(" \t[+] BACKING UP FILE")
     if os.path.isfile(COMPLETED_JOB_HISTORY):
         with open(COMPLETED_JOB_HISTORY, 'r') as jsonFile:
             tempHistoryFile = json.load(jsonFile)
@@ -206,7 +206,7 @@ def backupHistoryFile():
 
 def restoreJobHistory(tempHistory):
     # Save history file
-    print(" [+] RESTORING FILE")
+    print(" \t[+] RESTORING FILE")
     print(tempHistory)
     if tempHistory is not None:
         with open(COMPLETED_JOB_HISTORY, 'w+') as jsonFile:
