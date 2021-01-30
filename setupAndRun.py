@@ -1,6 +1,7 @@
 KEY = "43f4127ddffe3d40fd6a5271eb0140a20e0f77890e66d9e5183a1ba0fb02ef56"
 NON_ROOT_USER="pacman"
 UPDATE_SYSTEM=False
+PATCH_OS=True
 
 import os
 import json
@@ -215,6 +216,60 @@ def restoreJobHistory(tempHistory):
 
             json.dump(tempHistory, jsonFile)
             jsonFile.close()
+
+def detectAndPatchOSForDocker():
+    # Need to apply the right patched to the OS Kernel to ensure that Docker
+    # Can isolate memory (RAM) to each container and disable swap memory.
+
+    print(" \t[+] Patching OS")
+
+    # Detect OS 
+    raspberryPiOS = False
+    ubuntu = False
+    try:
+        import RPi.GPIO as gpio
+        raspberryPiOS = True
+    except (ImportError, RuntimeError):
+        raspberryPiOS = False
+
+
+
+    # Apply patch
+    if raspberryPiOS:
+        bootFileData = None
+        with open('example.txt') as f:
+            bootFileData = f.read()
+            f.close()
+
+        if "cgroup_enable=cpuset" in bootFileData and \
+            "cgroup_enable=memory" in bootFileData and "cgroup_memory=1" in bootFileData:
+
+            print(" \t[+] RaspberryPi OS successfully patched.")
+        else:
+            print(" \t[+] RaspberryPi OS needs to be patched!")
+
+            with open("test.txt", "a") as bootFile:
+                if "cgroup_enable=cpuset" not in bootFileData:
+                    bootFile.write("cgroup_enable=cpuset")
+                if "cgroup_enable=memory" not in bootFileData:
+                    bootFile.write("cgroup_enable=memory")
+                if "cgroup_memory=1" not in bootFileData:
+                    bootFile.write("cgroup_memory=1")
+
+            with open('example.txt') as f:
+                if "cgroup_enable=cpuset" in f.read() and \
+                "cgroup_enable=memory" in f.read() and "cgroup_memory=1" in f.read():
+                    print(" \t[+] RaspberryPi OS has been successfully patched!")
+                    time.sleep(5)
+                    print(" \t[+] RaspberryPi OS needs to be rebooted for patch to take effect.")
+                f.close()
+                print(" \t[+] RaspberryPi System rebooting in 5 seconds...")
+                time.sleep(5)
+                os.system('sudo reboot now')
+
+
+if PATCH_OS:
+    detectAndPatchOSForDocker()    
 
 # Back up the history file that stores previously run jobs
 tempHistory = backupHistoryFile()
