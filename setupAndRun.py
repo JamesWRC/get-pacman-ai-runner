@@ -275,8 +275,7 @@ def detectAndPatchOSForDocker():
                 f.close()
                 print(" \t[+] RaspberryPi System rebooting in 5 seconds...")
                 time.sleep(5)
-                exit(0)
-                # os.system('sudo reboot now')
+                os.system('sudo reboot now')
 
 
 if PATCH_OS:
