@@ -249,7 +249,7 @@ def detectAndPatchOSForDocker():
         if "cgroup_enable=cpuset" in bootFileData and \
             "cgroup_enable=memory" in bootFileData and "cgroup_memory=1" in bootFileData:
 
-            print(" \t[+] RaspberryPi OS successfully patched.")
+            print(" \t[+] RaspberryPi OS is already patched.")
         else:
             print(" \t[+] RaspberryPi OS needs to be patched!")
 
