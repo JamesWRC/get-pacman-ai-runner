@@ -262,8 +262,8 @@ def detectAndPatchOSForDocker():
 
                 if "cgroup_memory=1" not in bootFileData:
                     patchToWrite += "cgroup_memory=1 "
-                    
-                bootFile.write(str(bootFileData + patchToWrite))
+
+                bootFile.write(str(bootFileData.replace('\n','') + patchToWrite))
 
             with open('/boot/cmdline.txt') as f:
                 if "cgroup_enable=cpuset" in f.read() and \
