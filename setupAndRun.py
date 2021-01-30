@@ -255,11 +255,11 @@ def detectAndPatchOSForDocker():
 
             with open("/boot/cmdline.txt.test", "a") as bootFile:
                 if "cgroup_enable=cpuset" not in bootFileData:
-                    bootFile.write("cgroup_enable=cpuset")
+                    bootFile.write("cgroup_enable=cpuset ")
                 if "cgroup_enable=memory" not in bootFileData:
-                    bootFile.write("cgroup_enable=memory")
+                    bootFile.write("cgroup_enable=memory ")
                 if "cgroup_memory=1" not in bootFileData:
-                    bootFile.write("cgroup_memory=1")
+                    bootFile.write("cgroup_memory=1 ")
 
             with open('/boot/cmdline.txt') as f:
                 if "cgroup_enable=cpuset" in f.read() and \
@@ -270,7 +270,8 @@ def detectAndPatchOSForDocker():
                 f.close()
                 print(" \t[+] RaspberryPi System rebooting in 5 seconds...")
                 time.sleep(5)
-                os.system('sudo reboot now')
+                exit(0)
+                # os.system('sudo reboot now')
 
 
 if PATCH_OS:
