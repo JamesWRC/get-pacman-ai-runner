@@ -251,6 +251,9 @@ def detectAndPatchOSForDocker():
 
             print(" \t[+] RaspberryPi OS is already patched.")
         else:
+            print(" \t[+] Disabling memory swap space!")
+            os.system('sudo dphys-swapfile swapoff')
+
             print(" \t[+] RaspberryPi OS needs to be patched!")
 
             with open("/boot/cmdline.txt", "w+") as bootFile:
