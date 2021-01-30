@@ -11,6 +11,7 @@ import base64
 import time
 from pwd import getpwnam  
 import sys
+import subprocess
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 COMPLETED_JOB_HISTORY = "./codebase/history.json"
@@ -226,13 +227,14 @@ def detectAndPatchOSForDocker():
     # Detect OS 
     raspberryPiOS = False
     ubuntu = False
-    try:
-        import RPi.GPIO as gpio
+    raspianCheck = subprocess.check_output(['cat', '/etc/os-release'])
+    if "raspian" is raspianCheck.lower():
+        print(raspianCheck.lower())
         raspberryPiOS = True
-    except (ImportError, RuntimeError):
+    else:
         print("error")
         exit(0)
-        raspberryPiOS = False
+    
 
 
 
