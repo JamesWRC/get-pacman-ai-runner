@@ -242,7 +242,7 @@ def detectAndPatchOSForDocker():
     # Apply patch
     if raspberryPiOS:
         bootFileData = None
-        with open('/boot/cmdline.txt') as f:
+        with open('/boot/cmdline.txt.test') as f:
             bootFileData = f.read()
             f.close()
 
@@ -261,7 +261,7 @@ def detectAndPatchOSForDocker():
                 if "cgroup_memory=1" not in bootFileData:
                     bootFile.write("cgroup_memory=1 ")
 
-            with open('/boot/cmdline.txt') as f:
+            with open('/boot/cmdline.txt.test') as f:
                 if "cgroup_enable=cpuset" in f.read() and \
                 "cgroup_enable=memory" in f.read() and "cgroup_memory=1" in f.read():
                     print(" \t[+] RaspberryPi OS has been successfully patched!")
