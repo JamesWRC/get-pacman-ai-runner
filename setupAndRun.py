@@ -230,6 +230,8 @@ def detectAndPatchOSForDocker():
         import RPi.GPIO as gpio
         raspberryPiOS = True
     except (ImportError, RuntimeError):
+        print("error")
+        exit(0)
         raspberryPiOS = False
 
 
