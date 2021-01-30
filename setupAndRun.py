@@ -228,7 +228,7 @@ def detectAndPatchOSForDocker():
     raspberryPiOS = False
     ubuntu = False
     raspianCheck = subprocess.check_output(['cat', '/etc/os-release'])
-    if "raspian" is raspianCheck.lower():
+    if "raspian" in raspianCheck.lower():
         raspberryPiOS = True
     else:
         print(raspianCheck.lower())
