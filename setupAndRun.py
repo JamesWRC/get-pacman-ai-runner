@@ -13,12 +13,6 @@ from pwd import getpwnam
 import sys
 import subprocess
 
-# Ensure psutil is installed else install it.
-try:
-    import psutil
-except:
-    os.system('python3 -m pip install psutil')
-    import psutil
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
@@ -301,11 +295,11 @@ cleanUp()
 # Get the codebase
 getResources()
 
-# Removes containers volumes since they dont get updated
-cleanContainerVolumes()
-
 # Install and set up environment
 installRequirements()
+
+# Removes containers volumes since they dont get updated
+cleanContainerVolumes()
 
 # Install the code to run games (by BERKELY Uni and updated by Sebastian RMIT)
 getGameResources()
