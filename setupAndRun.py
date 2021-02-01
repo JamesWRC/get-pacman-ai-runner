@@ -12,6 +12,14 @@ import time
 from pwd import getpwnam  
 import sys
 import subprocess
+
+# Ensure psutil is installed else install it.
+try:
+    import psutil
+except:
+    os.system('python3 -m pip install psutil')
+    import psutil
+
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 COMPLETED_JOB_HISTORY = "./codebase/history.json"
