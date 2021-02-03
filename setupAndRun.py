@@ -101,6 +101,9 @@ def cleanUp():
     print("\n \t[+] Cleaning up game files in ramdisk.\n")
     os.system("rm -Rfv /tmp/ramdisk/*")
 
+    
+   
+
     # print("\n [+] Cleaning pacman docker image.\n")
     # os.system('docker image prune --force') 
 
@@ -118,6 +121,8 @@ def cleanContainerVolumes():
     print(" \t[+] Removing volume for runners...")
     for runner in range(0, Util().getNumRunners()):
         os.system('docker rm -v runner' + str(runner))
+        os.system('docker stop runner' + str(runner))
+        os.system('docker rm runner' + str(runner))
         print(" \t\t[-] Removed volume for runner" + str(runner) + ".")
 
 def checkKeys():
