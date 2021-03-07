@@ -28,7 +28,7 @@ def getResources():
 #    os.system("wget ")
     headers = {'userKey': KEY}
     request = requests.get(CODEBASE_RESOURCE_URL, headers=headers)
-
+    print(request.content)
     z = zipfile.ZipFile(io.BytesIO(request.content))
     
     # Get the code from (private) GitHub Repo.
