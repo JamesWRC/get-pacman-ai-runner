@@ -85,7 +85,8 @@ def run():
 
     print("\n \t[+] Running server!.\n")
 
-    os.system('sudo -u ' + NON_ROOT_USER + ' python3 driver.py')
+    # !! Note: Driver will run as root so that it can remove left over folders.
+    os.system('sudo python3 driver.py')
 
     # Set the directory back to the parent directory
     os.chdir(currentDirectory)
