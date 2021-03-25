@@ -197,10 +197,10 @@ def getGameResources():
 def buildDockerImage(cleanBuild):
     if cleanBuild:
         print("\n \t[+] Building fresh docker image.\n")
-        os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
+        os.system('docker buildx build --platform linux/arm64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
     else:
         print("\n \t[+] Semi-building using older docker image.\n")
-        os.system('docker build --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
+        os.system('docker buildx build --platform linux/arm64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
 
         pass    
 
