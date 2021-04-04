@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #   Update system.
 RUN apt -y update
 RUN apt -y upgrade
-RUN apt-get -y install apt-transport-https ca-certificates curl gnupg2 lsb-release software-properties-common git
+RUN apt -y install apt-transport-https ca-certificates curl gnupg2 lsb-release software-properties-common git
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
@@ -16,9 +16,10 @@ RUN echo \
   "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null 
 
-RUN apt-get update
+RUN apt update
 
-RUN apt-get -y install docker-ce docker-ce-cli containerd.io
+RUN apt -y install docker-ce docker-ce-cli containerd.io
+RUN apt -y install sudo
 # RUN bash service docker start
 # RUN docker run hello-world
 
@@ -28,7 +29,6 @@ RUN apt -y install python3-pip
 RUN pip3 install psutil
 
 COPY setupAndRun.py setupAndRun.py
-RUN chmod +x setupAndRun.py
 
 # RUN addgroup runner
 # RUN useradd pacman -u 1337 --groups runner --create-home
