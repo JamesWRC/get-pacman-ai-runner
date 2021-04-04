@@ -19,8 +19,13 @@ RUN echo \
 RUN apt-get update
 
 RUN apt-get -y install docker-ce docker-ce-cli containerd.io
-RUN bash service docker start
+# RUN bash service docker start
 # RUN docker run hello-world
+
+# Environment requirements
+RUN apt -y install python3-prop
+
+RUN pip3 install psutil
 
 COPY setupAndRun.py setupAndRun.py
 RUN chmod +x setupAndRun.py
