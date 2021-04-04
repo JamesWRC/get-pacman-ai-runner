@@ -23,7 +23,7 @@ RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 # RUN docker run hello-world
 
 # Environment requirements
-RUN apt -y install python3-prop
+RUN apt -y install python3-pip
 
 RUN pip3 install psutil
 
