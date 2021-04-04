@@ -5,8 +5,8 @@ LABEL maintainer="github.com/JamesWRC"
 ENV DEBIAN_FRONTEND=noninteractive
 
 #   Update system.
-RUN apt update
-RUN apt upgrade
+RUN apt -y update
+RUN apt -y upgrade
 
 RUN apk add docker
 
