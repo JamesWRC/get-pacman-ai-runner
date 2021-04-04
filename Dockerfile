@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #   Update system.
 RUN apt -y update
 RUN apt -y upgrade
-RUN apt-get -y install apt-transport-https ca-certificates curl gnupg2 lsb-release software-properties-common
+RUN apt-get -y install apt-transport-https ca-certificates curl gnupg2 lsb-release software-properties-common git
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
@@ -20,7 +20,7 @@ RUN apt-get update
 
 RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 RUN bash service docker start
-RUN docker run hello-world
+# RUN docker run hello-world
 RUN apk add docker
 
 COPY setupAndRun.py /codebase/setupAndRun.py
