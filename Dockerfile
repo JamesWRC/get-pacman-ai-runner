@@ -22,14 +22,14 @@ RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 RUN bash service docker start
 # RUN docker run hello-world
 
-RUN mkdir /codebase
-COPY setupAndRun.py /codebase/setupAndRun.py
-RUN chmod +x /codebase/setupAndRun.py
+RUN mkdir /assets
+COPY setupAndRun.py /assets/setupAndRun.py
+RUN chmod +x /assets/setupAndRun.py
 
 # RUN addgroup runner
 # RUN useradd pacman -u 1337 --groups runner --create-home
 
 # USER pacman
 
-CMD ["python3 /codebase/setupAndRun.py"]
+CMD ["python3 /assets/setupAndRun.py"]
 
