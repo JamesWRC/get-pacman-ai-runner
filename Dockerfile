@@ -21,7 +21,6 @@ RUN apt-get update
 RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 RUN bash service docker start
 # RUN docker run hello-world
-RUN apk add docker
 
 COPY setupAndRun.py /codebase/setupAndRun.py
 RUN chmod +x /codebase/setupAndRun.py
