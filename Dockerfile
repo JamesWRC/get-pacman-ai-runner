@@ -1,4 +1,4 @@
-FROM docker.io/arm64v8/ubuntu:latest   
+FROM arm64v8/ubuntu:latest   
 LABEL maintainer="github.com/JamesWRC"
 ENV DEBIAN_FRONTEND=noninteractive
 
