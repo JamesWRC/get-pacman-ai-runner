@@ -3,7 +3,7 @@ name: Code was rejected
 about: This template is used to help provide enough feedback for us to help you to
   see why your code was rejected.
 title: "[support] "
-labels: ''
+labels: help wanted, run refused
 assignees: JamesWRC
 
 ---
