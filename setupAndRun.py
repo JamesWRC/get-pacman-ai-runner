@@ -25,12 +25,15 @@ def setVariables():
     load_dotenv()
 
     if(os.getenv('ORG_KEY') != ""):
-        org = os.getenv('ORG')
-        org_key = os.getenv('ORG_KEY')
-        non_root_user = os.getenv('NON_ROOT_USER')
-        update_system = os.getenv('UPDATE_SYSTEM').lower() in ('true', '1', 't', 'True', 'TRUE')
-        patch_os = os.getenv('PATCH_OS').lower() in ('true', '1', 't', 'True', 'TRUE')
-        return True
+        try:
+            org = os.getenv('ORG')
+            org_key = os.getenv('ORG_KEY')
+            non_root_user = os.getenv('NON_ROOT_USER')
+            update_system = os.getenv('UPDATE_SYSTEM').lower() in ('true', '1', 't', 'True', 'TRUE')
+            patch_os = os.getenv('PATCH_OS').lower() in ('true', '1', 't', 'True', 'TRUE')
+            return True
+        except:
+            return False
     else:
         return False
     # gets values from this script, .env file or params when running this file.
