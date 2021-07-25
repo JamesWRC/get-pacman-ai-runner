@@ -58,6 +58,8 @@ def getResources():
     z.extractall(".")
 
     print("\n \t[+] Moving files.\n")
+    print(request.headers['X-PACMAN-ZIPNAME'])
+    print(request.headers['X-GITHUB-RELEASE-VERSION'])
     print("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
     os.system("mv ./" + request.headers['X-PACMAN-ZIPNAME'] + "-" + request.headers['X-GITHUB-RELEASE-VERSION'] + "/* .")
     ########################################################################
