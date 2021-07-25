@@ -306,6 +306,7 @@ def detectAndPatchOSForDocker():
                 os.system('sudo reboot now')
 
 print(setVariables())
+print(org_key)
 if not setVariables():
     print(".env file is not set up correctly. See README about how to set it up.")
 
