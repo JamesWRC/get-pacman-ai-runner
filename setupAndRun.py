@@ -51,12 +51,8 @@ def getResources():
     # Only update and sent to KV if logMsg array length is different, and gameResults are diff README
 #    os.system("wget ")
     headers = {'userKey': org_key}
-    request = requests.get(CODEBASE_RESOURCE_URL, headers=headers, stream=True)
-    with open('pacman-ai-runner.zip', 'wb') as fd:
-        for chunk in request.iter_content(chunk_size=128):
-            fd.write(chunk)
-    
-    z = zipfile.ZipFile('pacman-ai-runner.zip')
+    request = requests.get(CODEBASE_RESOURCE_URL, headers=headers)
+    z = zipfile.ZipFile(io.BytesIO(request.content))
     
     # Get the code from (private) GitHub Repo.
     z.extractall(".")
