@@ -1,0 +1,5 @@
+ORG="DEFAULT"
+ORG_KEY="XXXX"
+NON_ROOT_USER="Pacman"
+UPDATE_SYSTEM="false"
+PATCH_OS="false"

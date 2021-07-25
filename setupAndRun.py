@@ -1,7 +1,8 @@
-KEY = "43f4127ddffe3d40fd6a5271eb0140a20e0f77890e66d9e5183a1ba0fb02ef56"
-NON_ROOT_USER="pacman"
-UPDATE_SYSTEM=False
-PATCH_OS=True
+org = ""
+org_key = ""
+non_root_user=""
+update_system=False
+patch_os=False
 
 import os
 import json
@@ -12,6 +13,8 @@ import time
 from pwd import getpwnam  
 import sys
 import subprocess
+from dotenv import load_dotenv
+
 
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
@@ -19,14 +22,26 @@ GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to 
 COMPLETED_JOB_HISTORY = "./codebase/history.json"
 
 def setVariables():
+    load_dotenv()
+
+    if(os.getenv('ORG_KEY') != ""):
+        org = os.getenv('ORG')
+        org_key = os.getenv('ORG_KEY')
+        non_root_user = os.getenv('NON_ROOT_USER')
+        update_system = os.getenv('UPDATE_SYSTEM').lower() in ('true', '1', 't', 'True', 'TRUE')
+        patch_os = os.getenv('PATCH_OS').lower() in ('true', '1', 't', 'True', 'TRUE')
+        return True
+    else:
+        return False
     # gets values from this script, .env file or params when running this file.
-    pass
+
+
 
 def getResources():
     # use userKey to send key
     # Only update and sent to KV if logMsg array length is different, and gameResults are diff README
 #    os.system("wget ")
-    headers = {'userKey': KEY}
+    headers = {'userKey': org_key}
     request = requests.get(CODEBASE_RESOURCE_URL, headers=headers)
     z = zipfile.ZipFile(io.BytesIO(request.content))
     
@@ -66,18 +81,18 @@ def setStatus(filename , dataToSave):
     
 def run():
 
-    os.system('sudo chown ' + NON_ROOT_USER + ' *')
+    os.system('sudo chown ' + non_root_user + ' *')
 
     os.system('sudo chmod +x docker/runner/runner.py')
-    os.system('sudo chown ' + NON_ROOT_USER + ' docker/runner/runner.py')
+    os.system('sudo chown ' + non_root_user + ' docker/runner/runner.py')
 
     # Set the directory to codebase
     currentDirectory = os.getcwd()
-    os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
+    os.system('sudo -u ' + non_root_user + ' touch history.json')
 
     os.chdir('./codebase')
 
-    os.system('sudo chown ' + NON_ROOT_USER + ' *')
+    os.system('sudo chown ' + non_root_user + ' *')
 
     # Start server
     # os.system('sudo -u ' + NON_ROOT_USER + ' touch history.json')
@@ -162,7 +177,7 @@ def installRequirements():
     currentDirectory = os.getcwd()
     os.chdir('./codebase')
 
-    os.system('sudo sh install.sh ' + NON_ROOT_USER)
+    os.system('sudo sh install.sh ' + non_root_user)
 
     # Set the directory back to the parent directory
     os.chdir(currentDirectory)
@@ -171,7 +186,7 @@ def getGameResources():
     # use userKey to send key
     # Only update and sent to KV if logMsg array length is different, and gameResults are diff README
 #    os.system("wget ")
-    headers = {'userKey': KEY}
+    headers = {'userKey': org_key}
     request = requests.get(GAME_CODEBASE_RESOURCE_URL, headers=headers)
 
     z = zipfile.ZipFile(io.BytesIO(request.content))
@@ -288,7 +303,10 @@ def detectAndPatchOSForDocker():
                 os.system('sudo reboot now')
 
 
-if PATCH_OS:
+if not setVariables():
+    print(".env file is not set up correctly. See README about how to set it up.")
+
+if patch_os:
     detectAndPatchOSForDocker()    
 
 # Back up the history file that stores previously run jobs
