@@ -26,6 +26,12 @@ def setVariables():
 
     if(os.getenv('ORG_KEY') != ""):
         try:
+            global org
+            global org_key
+            global non_root_user
+            global update_system
+            global patch_os
+
             org = os.getenv('ORG')
             org_key = os.getenv('ORG_KEY')
             non_root_user = os.getenv('NON_ROOT_USER')
