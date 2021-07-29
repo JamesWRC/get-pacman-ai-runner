@@ -228,7 +228,7 @@ def getGameResources():
 
 
 def buildDockerImage(cleanBuild):
-    from codebase.util import Util
+    from util import Util
     headers = { 'userKey': org_key, }
 
     tokenRespinse = Util().makeRequest(PACMAN_AI_CONTAINER_PAT, 'GET', headers)
