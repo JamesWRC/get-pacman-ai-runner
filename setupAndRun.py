@@ -14,12 +14,15 @@ from pwd import getpwnam
 import sys
 import subprocess
 from dotenv import load_dotenv
-
-
+from util import Util
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 COMPLETED_JOB_HISTORY = "./codebase/history.json"
+
+#Get the Personal Access Token (PAT) to fetch the Pacman-ai-runner prebuilt amd64(x86) container.
+PACMAN_AI_CONTAINER_PAT = 'https://api.pacman.ai/auth/generatePAT'
+
 
 def setVariables():
     load_dotenv()
@@ -225,13 +228,24 @@ def getGameResources():
 
 
 def buildDockerImage(cleanBuild):
-    if cleanBuild:
+    from codebase.util import Util
+    headers = { 'userKey': org_key, }
+
+    tokenRespinse = Util().makeRequest('GET', PACMAN_AI_CONTAINER_PAT, headers)
+    tokenRespinse = tokenRespinse.json()
+    #Gets the value of the success in the response, if its true then pull, 
+    # if its false or does not exist then try and build manually.
+    if tokenRespinse.get('success', False) and tokenRespinse.get('token') and tokenRespinse.status_code == 200:
+        pullFromGitHubPackageRegistry = 'echo '+ str(tokenRespinse.get('token')) + ' | docker login ghcr.io -u JamesWRC --password-stdin'
+        os.system(pullFromGitHubPackageRegistry)
+        os.system('docker pull ghcr.io/jameswrc/pacman-ai-runner:latest')
+
+    elif cleanBuild:
         print("\n \t[+] Building fresh docker image.\n")
         os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
     else:
         print("\n \t[+] Semi-building using older docker image.\n")
         os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
-
         pass    
 
 def backupHistoryFile():

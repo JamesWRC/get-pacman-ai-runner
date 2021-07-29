@@ -17,12 +17,7 @@ class Util:
 
         self.runnerRamDiskAmt = (self.disposableRAM / self.numRunners)   
         self.hostRamDiskAmt = (self.runnerRamDiskAmt * self.numRunners)//2
-        print("ram")
-        print(self.runnerRamDiskAmt)
-        print("runners")
-        print(self.numRunners)
-        print("total ram")
-        print(self.disposableRAM)
+
         # If the host can handle enough RAM for 0.5GB per runner
         self.canLog = self.runnerRamDiskAmt >= RUNNER_MIN_RAM_TO_LOG//2 
 
