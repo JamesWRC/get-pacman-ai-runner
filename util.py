@@ -21,6 +21,13 @@ class Util:
         # If the host can handle enough RAM for 0.5GB per runner
         self.canLog = self.runnerRamDiskAmt >= RUNNER_MIN_RAM_TO_LOG//2 
 
+    def getCanLog(self):
+        """
+        Returns if this servers hardware is strong enough to 
+        handle full logging for runners.
+        """
+        return self.canLog
+
     def getHostRamDiskAmt(self):
         """
         WARNING:    Returned value used in install script, DO NOT CHANGE.
@@ -34,12 +41,34 @@ class Util:
         Returns the amount of RAM needed for a runners RAM disk
         """
         return self.bytesToMb(self.runnerRamDiskAmt*1.001)
+        
+
+    def getNumRunners(self):
+        """
+        Returns the number of runers this server can support.
+        """
+        return self.numRunners
 
     def bytesToMb(self, amt):
         """
         Convert bytes to MB
         """
         return amt/1000/1000
+
+    def getServerID(self):
+        """
+        Get the UUID of this server to give a unique ID for each runner.
+        """
+        return str(get_mac())
+
+    def makeRequest(self, url, method, headers=None, json=None):
+        """
+        Request helper method to make requests using mutual authentication.
+        """
+        response = requests.request(method, url, headers=headers, json=json, cert=("./codebase/private.cert", "./codebase/private.key"))
+        return response
+
+    
 
 
 if __name__ == "__main__":
@@ -55,4 +84,3 @@ if __name__ == "__main__":
 
 
 
- 
