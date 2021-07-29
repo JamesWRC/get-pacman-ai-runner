@@ -231,7 +231,7 @@ def buildDockerImage(cleanBuild):
     from codebase.util import Util
     headers = { 'userKey': org_key, }
 
-    tokenRespinse = Util().makeRequest('GET', PACMAN_AI_CONTAINER_PAT, headers)
+    tokenRespinse = Util().makeRequest(PACMAN_AI_CONTAINER_PAT, 'GET', headers)
     tokenRespinse = tokenRespinse.json()
     #Gets the value of the success in the response, if its true then pull, 
     # if its false or does not exist then try and build manually.
