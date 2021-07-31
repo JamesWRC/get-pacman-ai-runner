@@ -230,6 +230,8 @@ def getGameResources():
 def buildDockerImage(cleanBuild):
     from util import Util
     headers = { 'userKey': org_key, }
+    print("### Cleaning up unused Docker Containers, Images, Volumes, Networks & Build cache.")
+    os.system('docker system prune --volumes -f')
 
     tokenResponse = Util().makeRequest(PACMAN_AI_CONTAINER_PAT, 'GET', headers)
     print(tokenResponse.content)
