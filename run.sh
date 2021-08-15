@@ -9,6 +9,11 @@ INSTALL_SCRIPT_LOCATION="codebase/install.sh"
 # Update if needed.
 echo " [+] Checking for updates..."
 git pull
+sudo apt-get -y install python3-pip
+pip3 --version
+
+echo " [+] Installing deps..."
+pip3 install -r requirements.txt
 
 script_running=$(ps -ef | grep "driver.py" | grep -v "grep")
 var_length=`expr length "${script_running}"`
