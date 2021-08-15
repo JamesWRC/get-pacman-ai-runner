@@ -5,3 +5,4 @@ python-dotenv==0.19.0
 requests==2.26.0
 six==1.15.0
 urllib3==1.26.6
+psutil
