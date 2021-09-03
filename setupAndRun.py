@@ -13,7 +13,7 @@ import time
 from pwd import getpwnam  
 import sys
 import subprocess
-from dotenv import load_dotenv
+from dotenv import load_dotenv 
 from util import Util
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
@@ -228,6 +228,9 @@ def getGameResources():
 
 
 def buildDockerImage(cleanBuild):
+    # Get the docker container needed to run cross platform
+    os.system('docker run --privileged --rm tonistiigi/binfmt --install all')
+    
     from util import Util
     headers = { 'userKey': org_key, }
     print("### Cleaning up unused Docker Containers, Images, Volumes, Networks & Build cache.")
