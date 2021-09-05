@@ -13,8 +13,8 @@ import time
 from pwd import getpwnam
 import sys
 import subprocess
-from dotenv import load_dotenv
 from util import Util
+from dotenv import load_dotenv
 
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
