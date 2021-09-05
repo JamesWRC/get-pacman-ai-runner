@@ -13,8 +13,9 @@ import time
 from pwd import getpwnam  
 import sys
 import subprocess
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
 from util import Util
+
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
