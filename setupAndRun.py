@@ -25,7 +25,7 @@ PACMAN_AI_CONTAINER_PAT = 'https://api.pacman.ai/auth/generatePAT'
 
 
 def setVariables():
-    #
+    #.
     from dotenv import load_dotenv
     load_dotenv()
 
