@@ -14,7 +14,6 @@ from pwd import getpwnam
 import sys
 import subprocess
 from util import Util
-from dotenv import load_dotenv
 
 
 CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase to install server
@@ -26,6 +25,7 @@ PACMAN_AI_CONTAINER_PAT = 'https://api.pacman.ai/auth/generatePAT'
 
 
 def setVariables():
+    from dotenv import load_dotenv
     load_dotenv()
 
     if(os.getenv('ORG_KEY') != ""):
