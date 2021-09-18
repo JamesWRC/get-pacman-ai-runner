@@ -376,8 +376,8 @@ dev = False
 if len(sys.argv) > 1:
     if sys.argv[1] == "--no-clean-build" or sys.argv[1] == "-ncb":
         buildClean = False
-    if sys.argv[1] == "--dev" or sys.argv[1] == "-d"
-    dev = True
+    if sys.argv[1] == "--dev" or sys.argv[1] == "-d":
+        dev = True
 buildDockerImage(buildClean, dev)
 
 # Restore hostory file
