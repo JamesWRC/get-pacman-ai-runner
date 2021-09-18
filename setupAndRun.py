@@ -243,14 +243,15 @@ def buildDockerImage(cleanBuild):
     tokenResponse = tokenResponse.json()
     #Gets the value of the success in the response, if its true then pull, 
     # if its false or does not exist then try and build manually.
-    if not cleanBuild and tokenResponse.get('success', False) and tokenResponse.get('token'):
+
+    if cleanBuild:
+        print("\n \t[+] Building fresh docker image.\n")
+        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
+    
+    elif tokenResponse.get('success', False) and tokenResponse.get('token'):
         pullFromGitHubPackageRegistry = 'echo '+ str(tokenResponse.get('token')) + ' | docker login ghcr.io -u JamesWRC --password-stdin'
         os.system(pullFromGitHubPackageRegistry)
         os.system('docker pull ghcr.io/jameswrc/pacman-ai-runner:latest')
-
-    elif cleanBuild:
-        print("\n \t[+] Building fresh docker image.\n")
-        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
     else:
         print("\n \t[+] Semi-building using older docker image.\n")
         os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
