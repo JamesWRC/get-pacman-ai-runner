@@ -246,7 +246,7 @@ def buildDockerImage(cleanBuild, dev):
 
     if dev:
         print("\n \t[+] Building fresh docker image.\n")
-        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
+        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
         return
 
     if tokenResponse.get('success', False) and tokenResponse.get('token'):
