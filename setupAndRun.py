@@ -229,7 +229,7 @@ def getGameResources():
 
 
 
-def buildDockerImage(cleanBuild):
+def buildDockerImage(cleanBuild, dev):
     # Get the docker container needed to run cross platform
     os.system('docker run --privileged --rm tonistiigi/binfmt --install all')
     
@@ -244,14 +244,18 @@ def buildDockerImage(cleanBuild):
     #Gets the value of the success in the response, if its true then pull, 
     # if its false or does not exist then try and build manually.
 
-    if cleanBuild:
+    if dev:
         print("\n \t[+] Building fresh docker image.\n")
         os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
-    
-    elif tokenResponse.get('success', False) and tokenResponse.get('token'):
+        return
+
+    if tokenResponse.get('success', False) and tokenResponse.get('token'):
         pullFromGitHubPackageRegistry = 'echo '+ str(tokenResponse.get('token')) + ' | docker login ghcr.io -u JamesWRC --password-stdin'
         os.system(pullFromGitHubPackageRegistry)
         os.system('docker pull ghcr.io/jameswrc/pacman-ai-runner:latest')
+    elif cleanBuild:
+        print("\n \t[+] Building fresh docker image.\n")
+        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
     else:
         print("\n \t[+] Semi-building using older docker image.\n")
         os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
@@ -368,11 +372,13 @@ getGameResources()
 
 # Build the image
 buildClean = True
+dev = False
 if len(sys.argv) > 1:
     if sys.argv[1] == "--no-clean-build" or sys.argv[1] == "-ncb":
         buildClean = False
-
-buildDockerImage(buildClean)
+    if sys.argv[1] == "--dev" or sys.argv[1] == "-d"
+    dev = True
+buildDockerImage(buildClean, dev)
 
 # Restore hostory file
 restoreJobHistory(tempHistory)
