@@ -243,7 +243,7 @@ def buildDockerImage(cleanBuild):
     tokenResponse = tokenResponse.json()
     #Gets the value of the success in the response, if its true then pull, 
     # if its false or does not exist then try and build manually.
-    if tokenResponse.get('success', False) and tokenResponse.get('token'):
+    if not cleanBuild and tokenResponse.get('success', False) and tokenResponse.get('token'):
         pullFromGitHubPackageRegistry = 'echo '+ str(tokenResponse.get('token')) + ' | docker login ghcr.io -u JamesWRC --password-stdin'
         os.system(pullFromGitHubPackageRegistry)
         os.system('docker pull ghcr.io/jameswrc/pacman-ai-runner:latest')
