@@ -20,7 +20,7 @@ CODEBASE_RESOURCE_URL = "https://getresources.pacman.ai"            # Codebase t
 GAME_CODEBASE_RESOURCE_URL = CODEBASE_RESOURCE_URL + "/runner"    # Codebase to get the code to run the games.
 COMPLETED_JOB_HISTORY = "./codebase/history.json"
 
-#Get the Personal Access Token (PAT) to fetch the Pacman-ai-runner prebuilt amd64(x86) container.
+#Get the Personal Access Token (PAT) to fetch the Pacman-ai-runner prebuilt amd64(x86) and aarch64(arm), default aarch64 container.
 PACMAN_AI_CONTAINER_PAT = 'https://api.pacman.ai/auth/generatePAT'
 
 
@@ -246,19 +246,19 @@ def buildDockerImage(cleanBuild, dev):
 
     if dev:
         print("\n \t[+] Building fresh docker image.\n")
-        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
+        os.system('docker buildx build --platform linux/aarch64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
         return
 
     if tokenResponse.get('success', False) and tokenResponse.get('token'):
         pullFromGitHubPackageRegistry = 'echo '+ str(tokenResponse.get('token')) + ' | docker login ghcr.io -u JamesWRC --password-stdin'
         os.system(pullFromGitHubPackageRegistry)
-        os.system('docker pull ghcr.io/jameswrc/pacman-ai-runner:latest')
+        os.system('docker pull ghcr.io/jameswrc/pacman-ai-runner:aarch64-latest')
     elif cleanBuild:
         print("\n \t[+] Building fresh docker image.\n")
-        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile . --no-cache')
+        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:aarch64-latest -f ./docker/Dockerfile . --no-cache')
     else:
         print("\n \t[+] Semi-building using older docker image.\n")
-        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:latest -f ./docker/Dockerfile .')
+        os.system('docker buildx build --platform linux/amd64 --force-rm=true -t pacman:aarch64-latest -f ./docker/Dockerfile .')
         pass    
 
 def backupHistoryFile():
